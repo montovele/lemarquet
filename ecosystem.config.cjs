@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'lemarquet-api',
       cwd: '/var/www/ssaxxon/lemarquet',
-      script: './server.js',
+      script: 'server/index.js',
       interpreter: 'node',
       node_args: '--use-system-ca',
       instances: 1,
