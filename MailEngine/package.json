@@ -1,0 +1,24 @@
+{
+  "name": "diagnostico-backend",
+  "version": "1.0.0",
+  "description": "Backend para diagnóstico empresarial",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test tests/architecture.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.2",
+    "express": "^4.18.4",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.23.2",
+    "nodemailer": "^7.0.2"
+  }
+}

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo contacto recibido</title>
+</head>
+
+<body style="
+    margin:0;
+    padding:20px;
+    background:#f8fafc;
+    font-family:Arial,sans-serif;
+    color:#1f2937;
+    line-height:1.6;
+">
+
+<div style="
+    max-width:700px;
+    margin:auto;
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:30px;
+">
+
+    <!-- HEADER -->
+
+    <div style="
+        border-bottom:2px solid #2563eb;
+        margin-bottom:24px;
+        padding-bottom:14px;
+    ">
+
+        <h2 style="
+            margin:0;
+            color:#0f172a;
+        ">
+
+            HENCOM | Nuevo Diagnóstico Recibido
+
+        </h2>
+
+        <p style="
+            margin-top:6px;
+            color:#64748b;
+            font-size:14px;
+        ">
+
+            Se ha registrado una nueva solicitud desde el diagnóstico empresarial.
+
+        </p>
+
+    </div>
+
+    <!-- EMPRESA -->
+
+    <h3 style="
+        border-bottom:1px solid #e5e7eb;
+        padding-bottom:6px;
+    ">
+
+        🏢 Datos de la Empresa
+
+    </h3>
+
+    <table style="
+        width:100%;
+        border-collapse:collapse;
+        font-size:14px;
+        margin-bottom:24px;
+    ">
+
+        <tr>
+
+            <td width="35%"><strong>Empresa</strong></td>
+
+            <td>{{empresa}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Contacto</strong></td>
+
+            <td>{{contacto}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Correo</strong></td>
+
+            <td>
+
+                <a href="mailto:{{correo}}">
+
+                    {{correo}}
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Teléfono</strong></td>
+
+            <td>{{telefono}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Ciudad</strong></td>
+
+            <td>{{ciudad}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Estado</strong></td>
+
+            <td>{{estado}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Giro</strong></td>
+
+            <td>{{giro}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Tipo Empresa</strong></td>
+
+            <td>{{tipo_empresa}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Empleados</strong></td>
+
+            <td>{{empleados}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Sucursales</strong></td>
+
+            <td>{{sucursales}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Antigüedad</strong></td>
+
+            <td>{{antiguedad}}</td>
+
+        </tr>
+
+    </table>
+
+    <!-- PROYECTO -->
+
+    <h3 style="
+        border-bottom:1px solid #e5e7eb;
+        padding-bottom:6px;
+    ">
+
+        🎯 Proyecto
+
+    </h3>
+
+    <table style="
+        width:100%;
+        border-collapse:collapse;
+        font-size:14px;
+        margin-bottom:24px;
+    ">
+
+        <tr>
+
+            <td width="35%"><strong>Objetivo</strong></td>
+
+            <td>{{objetivo}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Soluciones</strong></td>
+
+            <td>{{soluciones}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>ERP</strong></td>
+
+            <td>{{erp}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>CRM</strong></td>
+
+            <td>{{crm}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Sitio Web</strong></td>
+
+            <td>{{website}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>E-Commerce</strong></td>
+
+            <td>{{ecommerce}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Presupuesto</strong></td>
+
+            <td>{{presupuesto}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><strong>Fecha Inicio</strong></td>
+
+            <td>{{fecha_inicio}}</td>
+
+        </tr>
+
+    </table>
+
+    <!-- OBSERVACIONES -->
+
+    <h3 style="
+        border-bottom:1px solid #e5e7eb;
+        padding-bottom:6px;
+    ">
+
+        📋 Diagnóstico Empresarial
+
+    </h3>
+
+    <div style="
+        background:#f8fafc;
+        border:1px solid #e2e8f0;
+        border-radius:8px;
+        padding:18px;
+        margin-bottom:24px;
+    ">
+
+        {{observaciones}}
+
+    </div>
+
+    <!-- RESUMEN -->
+
+    <h3 style="
+        border-bottom:1px solid #e5e7eb;
+        padding-bottom:6px;
+    ">
+
+        📝 Resumen
+
+    </h3>
+
+    <div style="
+        background:#ffffff;
+        border:1px solid #e5e7eb;
+        border-radius:8px;
+        padding:16px;
+        margin-bottom:24px;
+    ">
+
+        {{resumen}}
+
+    </div>
+
+    <!-- PRIVACIDAD -->
+
+    <div style="
+        background:#eff6ff;
+        border-left:4px solid #2563eb;
+        padding:14px;
+        border-radius:6px;
+    ">
+
+        🔒
+
+        <strong>
+
+            Políticas de Privacidad:
+
+        </strong>
+
+        {{privacy}}
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <hr style="
+        margin:30px 0 16px;
+        border:none;
+        border-top:1px solid #e5e7eb;
+    ">
+
+    <p style="
+        text-align:center;
+        color:#94a3b8;
+        font-size:12px;
+        margin:0;
+    ">
+
+        Este correo fue generado automáticamente por el sistema HENCOM.
+
+    </p>
+
+</div>
+
+</body>
+
+</html>

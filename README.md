@@ -16,7 +16,7 @@ Desde la carpeta raíz del proyecto, crea `.env` a partir del ejemplo si aún no
 Copy-Item .env.example .env
 ```
 
-Edita `.env` y define la conexión MySQL (`MYSQL_HOST`, `MYSQL_PORT`, `MYSQL_DATABASE`, `MYSQL_USER`, `MYSQL_PASSWORD`), las credenciales del agente (`ASSISTANCE_USERNAME`, `ASSISTANCE_PASSWORD`), una clave aleatoria de al menos 32 caracteres para `AUTH_TOKEN_SECRET` y las variables SMTP `SMTP_*` para enviar códigos de recuperación mediante `MailEngine`. El puerto del backend se configura con `PORT` y por defecto es `3220`.
+Edita `.env` y define la conexión MySQL (`MYSQL_HOST`, `MYSQL_PORT`, `MYSQL_DATABASE`, `MYSQL_USER`, `MYSQL_PASSWORD`), las credenciales del agente (`ASSISTANCE_USERNAME`, `ASSISTANCE_PASSWORD`), una clave aleatoria de al menos 32 caracteres para `AUTH_TOKEN_SECRET` y las variables SMTP `SMTP_*` para enviar códigos de recuperación mediante el motor de correo incluido en este proyecto. El puerto del backend se configura con `PORT` y por defecto es `3220`.
 
 El backend inicia con la opción `--use-system-ca` de Node para validar certificados SMTP contra el almacén de certificados de Windows, incluido el certificado de Avast Web/Mail Shield cuando inspecciona el correo. Mantén activa la validación TLS; no uses `NODE_TLS_REJECT_UNAUTHORIZED=0`.
 

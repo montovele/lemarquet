@@ -1,0 +1,28 @@
+[
+  {
+    "id": "1785627559825",
+    "createdAt": "2026-08-01T23:39:19.825Z",
+    "empresa": "Beta",
+    "contacto": "",
+    "correo": "",
+    "telefono": null,
+    "ciudad": null,
+    "estado": null,
+    "giro": null,
+    "tipo_empresa": null,
+    "empleados": 0,
+    "sucursales": 0,
+    "antiguedad": 0,
+    "objetivo": "Análisis de negocio",
+    "soluciones": null,
+    "erp": null,
+    "crm": null,
+    "website": null,
+    "ecommerce": null,
+    "presupuesto": null,
+    "fecha_inicio": null,
+    "observaciones": null,
+    "privacy": 0,
+    "status": "nuevo"
+  }
+]

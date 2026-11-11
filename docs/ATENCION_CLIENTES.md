@@ -11,7 +11,7 @@
 ## Configuración local
 
 1. Crea una copia local de `.env.example` llamada `.env`. No agregues este archivo al control de versiones ni publiques sus valores.
-2. Configura los datos de conexión MySQL (`MYSQL_HOST`, `MYSQL_PORT`, `MYSQL_DATABASE`, `MYSQL_USER`, `MYSQL_PASSWORD`), el usuario y contraseña del agente y una clave aleatoria de al menos 32 caracteres en `AUTH_TOKEN_SECRET`. Configura también las variables SMTP `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_REQUIRE_TLS`, `SMTP_IGNORE_TLS`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` y `SMTP_FROM_NAME` en `MailEngine/.env`. El ejemplo utiliza `lemarquet_asistance` como nombre de base.
+2. Configura en el `.env` de la raíz los datos de conexión MySQL (`MYSQL_HOST`, `MYSQL_PORT`, `MYSQL_DATABASE`, `MYSQL_USER`, `MYSQL_PASSWORD`), el usuario y contraseña del agente y una clave aleatoria de al menos 32 caracteres en `AUTH_TOKEN_SECRET`. Configura también ahí las variables SMTP `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_REQUIRE_TLS`, `SMTP_IGNORE_TLS`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` y `SMTP_FROM_NAME`. El motor de correo forma parte del mismo proyecto y lee esta configuración; también admite como respaldo un `MailEngine/.env` local existente. El ejemplo utiliza `lemarquet_asistance` como nombre de base.
 3. Usa una cuenta MySQL dedicada, no `root`. Un administrador de MySQL puede preparar la base y una cuenta limitada con estos comandos (reemplaza el marcador por una contraseña única y adapta el host si la API se conecta desde otra máquina):
 
    ```sql
