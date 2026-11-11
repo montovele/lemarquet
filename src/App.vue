@@ -1,7 +1,11 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import SupportDesk from './SupportDesk.vue'
+import CustomerChat from './CustomerChat.vue'
 
 const showScrollTop = ref(false)
+const isSupportDesk = ref(window.location.hash === '#/atencion')
+const isMobileMenuOpen = ref(false)
 
 const handleScroll = () => {
   showScrollTop.value = window.scrollY > 400
@@ -9,6 +13,23 @@ const handleScroll = () => {
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false
+}
+
+const handleHashChange = () => {
+  isSupportDesk.value = window.location.hash === '#/atencion'
+  closeMobileMenu()
+  if (isSupportDesk.value) {
+    window.scrollTo({ top: 0 })
+  }
+}
+
+const leaveSupportDesk = () => {
+  window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`)
+  isSupportDesk.value = false
 }
 
 const scrollToSection = (id) => {
@@ -24,11 +45,13 @@ const scrollToSection = (id) => {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  window.addEventListener('hashchange', handleHashChange)
   handleScroll()
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('hashchange', handleHashChange)
 })
 
 const b2bUrl = import.meta.env.VITE_SOLICITUD_URL_B2B || '#'
@@ -38,9 +61,10 @@ const projectUrl = import.meta.env.VITE_CONTACT_URL || demoUrl
 
 const navItems = [
   { label: 'Ecosistema', href: '#ecosistema' },
+  { label: 'Vende y gestiona', href: '#vende-sin-inventario' },
   { label: 'Solución B2B', href: '#b2b' },
-  { label: 'Gestión interna', href: '#backoffice' },
-  { label: 'Servicios', href: '#servicios' }
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Portafolio', href: '#portafolio' }
 ]
 
 const techStack = ['B2B', 'Backoffice', 'APIs', 'Integraciones', 'Infraestructura', 'Operación comercial']
@@ -105,6 +129,42 @@ const services = [
   }
 ]
 
+const portfolioProjects = [
+  {
+    name: 'LEMARQUET POS',
+    category: 'Software de gestión · Punto de venta',
+    description: 'Un punto de venta para comercios que reúne el cobro y la administración diaria. Permite registrar ventas, controlar aperturas y arqueos de caja, revisar existencias y consultar reportes desde un solo sistema.',
+    highlights: ['Ventas y cobro', 'Caja e inventario', 'Reportes operativos'],
+    url: 'https://pos.ssaxxon.com/',
+    theme: 'commerce',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400&q=85',
+    imageAlt: 'Cobro en el mostrador de un comercio',
+    signature: 'Vende con agilidad. Administra con claridad.'
+  },
+  {
+    name: 'Entremomentos',
+    category: 'Comunidad digital · Red social',
+    description: 'Un espacio personal para guardar y compartir historias, fotografías y momentos cotidianos. La experiencia invita a volver a los recuerdos y mantenerse cerca de la propia comunidad, con opciones para crear una cuenta o explorar.',
+    highlights: ['Historias y fotografías', 'Espacio personal', 'Exploración pública'],
+    url: 'https://social-media.ssaxxon.com/explore',
+    theme: 'memories',
+    image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1400&q=85',
+    imageAlt: 'Sendero soleado entre los árboles, imagen de portada de Entremomentos',
+    signature: 'Tus días siguen aquí.'
+  },
+  {
+    name: 'Holi Places',
+    category: 'Plataforma comunitaria · Congregaciones',
+    description: 'Una plataforma para descubrir lo que sucede en las congregaciones: sedes, encuentros, áreas de participación e historias. Reúne la información pública de cada comunidad y ayuda a las personas a encontrar un espacio donde participar.',
+    highlights: ['Sedes y agenda', 'Áreas de participación', 'Historias y actividades'],
+    url: 'https://holi-places.ssaxxon.com/',
+    theme: 'community',
+    image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1400&q=85',
+    imageAlt: 'Personas reunidas en una actividad comunitaria, imagen de portada de Holi Places',
+    signature: 'Un lugar en la mesa para cada persona.'
+  }
+]
+
 const stats = [
   { value: '3', label: 'líneas de negocio' },
   { value: '1', label: 'ecosistema claro' },
@@ -114,7 +174,8 @@ const stats = [
 </script>
 
 <template>
-  <div class="page-shell">
+  <SupportDesk v-if="isSupportDesk" @exit="leaveSupportDesk" />
+  <div v-else class="page-shell">
     <button v-if="showScrollTop" class="scroll-top" aria-label="Volver arriba" @click="scrollToTop">
       ↑
     </button>
@@ -125,11 +186,33 @@ const stats = [
           <img class="brand-mark" src="/navicon.png" alt="Lemarquet" />
         </div>
 
-        <nav>
-          <a v-for="link in navItems" :key="link.label" :href="link.href">{{ link.label }}</a>
-        </nav>
+        <button
+          class="mobile-menu-toggle"
+          type="button"
+          :aria-expanded="isMobileMenuOpen"
+          aria-controls="primary-navigation"
+          :aria-label="isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'"
+          @click="isMobileMenuOpen = !isMobileMenuOpen"
+          @keydown.esc="closeMobileMenu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
-        <a :href="b2bUrl" target="_blank" rel="noopener noreferrer" class="primary-button">Solicitar acceso B2B</a>
+        <div
+          id="primary-navigation"
+          class="nav-menu"
+          :class="{ 'is-open': isMobileMenuOpen }"
+          @keydown.esc="closeMobileMenu"
+        >
+          <nav class="main-nav" aria-label="Navegación principal">
+            <a v-for="link in navItems" :key="link.label" :href="link.href" @click="closeMobileMenu">{{ link.label }}</a>
+          </nav>
+
+          <a :href="b2bUrl" target="_blank" rel="noopener noreferrer" class="primary-button" @click="closeMobileMenu">Solicitar acceso B2B</a>
+          <a href="#/atencion" class="support-entry" @click="closeMobileMenu">Atención a clientes</a>
+        </div>
       </div>
     </header>
 
@@ -162,7 +245,7 @@ const stats = [
 
             <div class="cta-row">
               <button class="primary-button large" @click="scrollToSection('b2b')">Conocer solución B2B</button>
-              <button class="secondary-button large" @click="scrollToSection('backoffice')">Conocer gestión interna</button>
+              <button class="secondary-button large" @click="scrollToSection('vende-sin-inventario')">Vender y gestionar</button>
               <a :href="projectUrl" target="_blank" rel="noopener noreferrer" class="secondary-button large">DEMO</a>
             </div>
 
@@ -274,33 +357,26 @@ const stats = [
         </div>
       </section>
 
-      <section id="backoffice" class="section">
-        <div class="container">
-          <div class="section-heading left">
-            <span class="eyebrow">Gestión interna</span>
-            <h2>El centro operativo para administrar el negocio.</h2>
+      <section id="vende-sin-inventario" class="section idea-section">
+        <div id="backoffice" class="container idea-layout">
+          <div class="idea-copy">
+            <span class="eyebrow">Vende y gestiona desde un mismo entorno</span>
+            <h2>Que tu próxima venta empiece con una idea, no con una bodega.</h2>
+            <p>
+              ¿Te ilusiona vender, pero te frena comprar mercancía antes de saber si habrá clientes? Con una suscripción a Lemarquet puedes acceder a herramientas para presentar productos y organizar pedidos, sin empezar acumulando inventario. Así puedes concentrarte en conectar con tus primeros clientes.
+            </p>
+            <p>
+              Y cuando lleguen los pedidos, la gestión interna te ayuda a dar seguimiento a productos, proveedores y operación desde un mismo lugar. Los productos disponibles, el surtido y las condiciones comerciales dependerán del plan y de los acuerdos con cada proveedor.
+            </p>
+            <p>La suscripción da acceso a herramientas, no garantiza ganancias. Los ingresos dependen de las ventas, el margen, los costos y las condiciones comerciales aplicables.</p>
+            <a :href="managementUrl" target="_blank" rel="noopener noreferrer" class="primary-button large">Conocer la suscripción</a>
           </div>
 
-          <div class="business-layout">
-            <div class="business-copy">
-              <p>
-                El Backoffice concentra las herramientas necesarias para administrar y supervisar la operación empresarial detrás del entorno comercial.
-              </p>
-              <p>
-                No es un segundo portal comercial: es el entorno desde el cual se controla la operación.
-              </p>
-            </div>
-
-            <div class="list-panel">
-              <h3>Áreas principales</h3>
-              <ul>
-                <li v-for="item in backofficeAreas" :key="item">{{ item }}</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="cta-row" style="margin-top: 28px;">
-            <a :href="managementUrl" target="_blank" rel="noopener noreferrer" class="primary-button large">Conocer la gestión empresarial</a>
+          <div class="list-panel">
+            <h3>Gestión interna para acompañar tus ventas</h3>
+            <ul>
+              <li v-for="item in backofficeAreas" :key="item">{{ item }}</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -321,6 +397,63 @@ const stats = [
                 <li v-for="item in service.items" :key="item">{{ item }}</li>
               </ul>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="portafolio" class="section portfolio-section">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">Proyectos seleccionados</span>
+            <h2>Soluciones digitales diseñadas para resolver necesidades reales.</h2>
+            <p class="portfolio-intro">Desde facilitar la operación de un negocio hasta acercar a las comunidades, creamos productos y experiencias digitales útiles para el día a día.</p>
+          </div>
+
+          <div class="portfolio-grid">
+            <article v-for="(project, index) in portfolioProjects" :key="project.name" class="portfolio-card">
+              <div class="portfolio-art" :class="`portfolio-art-${project.theme}`">
+                <img :src="project.image" :alt="project.imageAlt" loading="lazy" decoding="async" />
+                <span class="portfolio-art-index">0{{ index + 1 }} / PROYECTO</span>
+                <span class="portfolio-signature">{{ project.signature }}</span>
+              </div>
+              <div class="portfolio-content">
+                <span class="portfolio-category">{{ project.category }}</span>
+                <h3>{{ project.name }}</h3>
+                <p>{{ project.description }}</p>
+                <ul class="portfolio-highlights">
+                  <li v-for="highlight in project.highlights" :key="highlight">{{ highlight }}</li>
+                </ul>
+                <a :href="project.url" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+                  Explorar proyecto <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section idea-section">
+        <div class="container idea-layout">
+          <div class="idea-copy">
+            <span class="eyebrow">De una idea a un producto digital</span>
+            <h2>Tu idea puede convertirse en un sistema con su propio modelo de ingresos.</h2>
+            <p>
+              Imagina una plataforma, comunidad, marketplace o herramienta creada alrededor de una necesidad que conoces bien. Podemos ayudarte a darle forma y desarrollar un sistema a la medida; si el proyecto lo necesita, también se puede incorporar una capa de monetización pensada desde el inicio.
+            </p>
+            <p>
+              El modelo se define según el valor que entregas y la experiencia que quieres ofrecer, para que el producto y su forma de generar ingresos puedan crecer juntos.
+            </p>
+            <a href="#servicios" class="primary-button large">Explorar desarrollo a medida <span aria-hidden="true">↓</span></a>
+          </div>
+
+          <div class="idea-models">
+            <span class="idea-models-label">Opciones que podemos explorar</span>
+            <ul>
+              <li><strong>Suscripciones</strong><span>Acceso recurrente a un servicio o comunidad.</span></li>
+              <li><strong>Planes y niveles</strong><span>Beneficios y herramientas según cada tipo de usuario.</span></li>
+              <li><strong>Funciones premium</strong><span>Capacidades adicionales para quienes las necesitan.</span></li>
+            </ul>
+            <p>El esquema se adapta a tu propuesta; no existe un modelo único para todas las ideas.</p>
           </div>
         </div>
       </section>
@@ -385,5 +518,6 @@ const stats = [
         </div>
       </section>
     </main>
+    <CustomerChat :avoid-scroll-button="showScrollTop" />
   </div>
 </template>
