@@ -177,25 +177,6 @@ a:focus-visible {
 .large { padding-inline: 1.7rem; }
 .full { width: 100%; }
 
-.support-entry {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.72rem 1rem;
-  border: 1px solid rgba(125, 211, 252, 0.24);
-  border-radius: 999px;
-  color: var(--primary);
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.support-entry:hover {
-  border-color: rgba(125, 211, 252, 0.6);
-  color: var(--text);
-}
-
 .top-demo {
   padding: 24px 0 0;
 }
@@ -1392,11 +1373,6 @@ a:focus-visible {
   }
 
   .main-nav a::after { display: none; }
-
-  .support-entry {
-    width: 100%;
-    padding: 8px 4px;
-  }
 
   .hero { padding-top: 56px; }
 

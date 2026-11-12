@@ -211,7 +211,6 @@ const stats = [
           </nav>
 
           <a :href="b2bUrl" target="_blank" rel="noopener noreferrer" class="primary-button" @click="closeMobileMenu">Solicitar acceso B2B</a>
-          <a href="#/atencion" class="support-entry" @click="closeMobileMenu">Atención a clientes</a>
         </div>
       </div>
     </header>

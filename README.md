@@ -45,7 +45,7 @@ npm run dev         # Frontend, puerto 5176
 npm run dev:server  # Backend, puerto 3220
 ```
 
-El panel de agentes está en `http://localhost:5176/#/atencion`. Los clientes pueden iniciar o retomar un chat desde el botón **Atención a clientes** de la página.
+El panel de agentes se abre directamente en `http://localhost:5176/#/atencion` en desarrollo y en `https://lemarquet.com/#/atencion` en producción. El enlace no aparece en la navegación pública, pero el acceso al panel requiere iniciar sesión con las credenciales configuradas mediante `ASSISTANCE_USERNAME` y `ASSISTANCE_PASSWORD` en el `.env` del servidor. Comparte la dirección solo con el equipo autorizado. Los clientes pueden iniciar o retomar un chat desde el botón **Atención a clientes** de la página.
 
 ## Compilación
 
